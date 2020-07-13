@@ -15,12 +15,14 @@
     <g class="body">
       <path
         class="bodyBGchanged"
+        ref="bodyBGchanged"
         style="display: none;"
         fill="#FFFFFF"
         d="M200,122h-35h-14.9V72c0-27.6-22.4-50-50-50s-50,22.4-50,50v50H35.8H0l0,91h200L200,122z"
       />
       <path
         class="bodyBGnormal"
+        ref="bodyBG"
         stroke="#3A5E77"
         stroke-width="2.5"
         stroke-linecap="round"
@@ -34,7 +36,7 @@
       />
     </g>
     <g class="earL">
-      <g class="outerEar" fill="#ddf1fa" stroke="#3a5e77" stroke-width="2.5">
+      <g class="outerEar" ref="outerEarL" fill="#ddf1fa" stroke="#3a5e77" stroke-width="2.5">
         <circle cx="47" cy="83" r="11.5" />
         <path
           d="M46.3 78.9c-2.3 0-4.1 1.9-4.1 4.1 0 2.3 1.9 4.1 4.1 4.1"
@@ -42,7 +44,7 @@
           stroke-linejoin="round"
         />
       </g>
-      <g class="earHair">
+      <g class="earHair" ref="earHairL">
         <rect x="51" y="64" fill="#FFFFFF" width="15" height="35" />
         <path
           d="M53.4 62.8C48.5 67.4 45 72.2 42.8 77c3.4-.1 6.8-.1 10.1.1-4 3.7-6.8 7.6-8.2 11.6 2.1 0 4.2 0 6.3.2-2.6 4.1-3.8 8.3-3.7 12.5 1.2-.7 3.4-1.4 5.2-1.9"
@@ -55,7 +57,7 @@
       </g>
     </g>
     <g class="earR">
-      <g class="outerEar">
+      <g class="outerEar" ref="outerEarR">
         <circle fill="#DDF1FA" stroke="#3A5E77" stroke-width="2.5" cx="153" cy="83" r="11.5" />
         <path
           fill="#DDF1FA"
@@ -66,7 +68,7 @@
           d="M153.7,78.9 c2.3,0,4.1,1.9,4.1,4.1c0,2.3-1.9,4.1-4.1,4.1"
         />
       </g>
-      <g class="earHair">
+      <g class="earHair" ref="earHairR">
         <rect x="134" y="64" fill="#FFFFFF" width="15" height="35" />
         <path
           fill="#FFFFFF"
@@ -80,6 +82,7 @@
     </g>
     <path
       class="chin"
+      ref="chin"
       d="M84.1 121.6c2.7 2.9 6.1 5.4 9.8 7.5l.9-4.5c2.9 2.5 6.3 4.8 10.2 6.5 0-1.9-.1-3.9-.2-5.8 3 1.2 6.2 2 9.7 2.5-.3-2.1-.7-4.1-1.2-6.1"
       fill="none"
       stroke="#3a5e77"
@@ -89,11 +92,13 @@
     />
     <path
       class="face"
+      ref="face"
       fill="#DDF1FA"
       d="M134.5,46v35.5c0,21.815-15.446,39.5-34.5,39.5s-34.5-17.685-34.5-39.5V46"
     />
     <path
       class="hair"
+      ref="hair"
       fill="#FFFFFF"
       stroke="#3A5E77"
       stroke-width="2.5"
@@ -101,7 +106,7 @@
       stroke-linejoin="round"
       d="M81.457,27.929 c1.755-4.084,5.51-8.262,11.253-11.77c0.979,2.565,1.883,5.14,2.712,7.723c3.162-4.265,8.626-8.27,16.272-11.235 c-0.737,3.293-1.588,6.573-2.554,9.837c4.857-2.116,11.049-3.64,18.428-4.156c-2.403,3.23-5.021,6.391-7.852,9.474"
     />
-    <g class="eyebrow">
+    <g class="eyebrow" ref="eyebrow">
       <path
         fill="#FFFFFF"
         d="M138.142,55.064c-4.93,1.259-9.874,2.118-14.787,2.599c-0.336,3.341-0.776,6.689-1.322,10.037 c-4.569-1.465-8.909-3.222-12.996-5.226c-0.98,3.075-2.07,6.137-3.267,9.179c-5.514-3.067-10.559-6.545-15.097-10.329 c-1.806,2.889-3.745,5.73-5.816,8.515c-7.916-4.124-15.053-9.114-21.296-14.738l1.107-11.768h73.475V55.064z"
@@ -115,34 +120,38 @@
         d="M63.56,55.102 c6.243,5.624,13.38,10.614,21.296,14.738c2.071-2.785,4.01-5.626,5.816-8.515c4.537,3.785,9.583,7.263,15.097,10.329 c1.197-3.043,2.287-6.104,3.267-9.179c4.087,2.004,8.427,3.761,12.996,5.226c0.545-3.348,0.986-6.696,1.322-10.037 c4.913-0.481,9.857-1.34,14.787-2.599"
       />
     </g>
-    <g class="eyeL">
+    <g class="eyeL" ref="eyeL">
       <circle cx="85.5" cy="78.5" r="3.5" fill="#3a5e77" />
       <circle cx="84" cy="76" r="1" fill="#fff" />
     </g>
-    <g class="eyeR">
+    <g class="eyeR" ref="eyeR">
       <circle cx="114.5" cy="78.5" r="3.5" fill="#3a5e77" />
       <circle cx="113" cy="76" r="1" fill="#fff" />
     </g>
-    <g class="mouth">
+    <g class="mouth" ref="mouth">
       <path
         class="mouthBG"
+        ref="mouthBG"
         fill="#617E92"
         d="M100.2,101c-0.4,0-1.4,0-1.8,0c-2.7-0.3-5.3-1.1-8-2.5c-0.7-0.3-0.9-1.2-0.6-1.8 c0.2-0.5,0.7-0.7,1.2-0.7c0.2,0,0.5,0.1,0.6,0.2c3,1.5,5.8,2.3,8.6,2.3s5.7-0.7,8.6-2.3c0.2-0.1,0.4-0.2,0.6-0.2 c0.5,0,1,0.3,1.2,0.7c0.4,0.7,0.1,1.5-0.6,1.9c-2.6,1.4-5.3,2.2-7.9,2.5C101.7,101,100.5,101,100.2,101z"
       />
       <path
         style="display: none;"
         class="mouthSmallBG"
+        ref="mouthSmallBG"
         fill="#617E92"
         d="M100.2,101c-0.4,0-1.4,0-1.8,0c-2.7-0.3-5.3-1.1-8-2.5c-0.7-0.3-0.9-1.2-0.6-1.8 c0.2-0.5,0.7-0.7,1.2-0.7c0.2,0,0.5,0.1,0.6,0.2c3,1.5,5.8,2.3,8.6,2.3s5.7-0.7,8.6-2.3c0.2-0.1,0.4-0.2,0.6-0.2 c0.5,0,1,0.3,1.2,0.7c0.4,0.7,0.1,1.5-0.6,1.9c-2.6,1.4-5.3,2.2-7.9,2.5C101.7,101,100.5,101,100.2,101z"
       />
       <path
         style="display: none;"
         class="mouthMediumBG"
+        ref="mouthMediumBG"
         d="M95,104.2c-4.5,0-8.2-3.7-8.2-8.2v-2c0-1.2,1-2.2,2.2-2.2h22c1.2,0,2.2,1,2.2,2.2v2 c0,4.5-3.7,8.2-8.2,8.2H95z"
       />
       <path
         style="display: none;"
         class="mouthLargeBG"
+        ref="mouthLargeBG"
         d="M100 110.2c-9 0-16.2-7.3-16.2-16.2 0-2.3 1.9-4.2 4.2-4.2h24c2.3 0 4.2 1.9 4.2 4.2 0 9-7.2 16.2-16.2 16.2z"
         fill="#617e92"
         stroke="#3a5e77"
@@ -152,6 +161,7 @@
       <defs>
         <path
           id="mouthMaskPath"
+          ref="mouthMaskPath"
           d="M100.2,101c-0.4,0-1.4,0-1.8,0c-2.7-0.3-5.3-1.1-8-2.5c-0.7-0.3-0.9-1.2-0.6-1.8 c0.2-0.5,0.7-0.7,1.2-0.7c0.2,0,0.5,0.1,0.6,0.2c3,1.5,5.8,2.3,8.6,2.3s5.7-0.7,8.6-2.3c0.2-0.1,0.4-0.2,0.6-0.2 c0.5,0,1,0.3,1.2,0.7c0.4,0.7,0.1,1.5-0.6,1.9c-2.6,1.4-5.3,2.2-7.9,2.5C101.7,101,100.5,101,100.2,101z"
         />
       </defs>
@@ -159,7 +169,7 @@
         <use xlink:href="#mouthMaskPath" overflow="visible" />
       </clipPath>
       <g clip-path="url(#mouthMask)">
-        <g class="tongue">
+        <g class="tongue" ref="tongue">
           <circle cx="100" cy="107" r="8" fill="#cc4a6c" />
           <ellipse
             class="tongueHighlight"
@@ -175,11 +185,13 @@
       <path
         clip-path="url(#mouthMask)"
         class="tooth"
+        ref="tooth"
         style="fill:#FFFFFF;"
         d="M106,97h-4c-1.1,0-2-0.9-2-2v-2h8v2C108,96.1,107.1,97,106,97z"
       />
       <path
         class="mouthOutline"
+        ref="mouthOutline"
         fill="none"
         stroke="#3A5E77"
         stroke-width="2.5"
@@ -188,12 +200,12 @@
       />
     </g>
     <path
-      class="nose"
+      class="nose" ref="nose"
       d="M97.7 79.9h4.7c1.9 0 3 2.2 1.9 3.7l-2.3 3.3c-.9 1.3-2.9 1.3-3.8 0l-2.3-3.3c-1.3-1.6-.2-3.7 1.8-3.7z"
       fill="#3a5e77"
     />
     <g class="arms" clip-path="url(#armMask)">
-      <g class="armL" style="visibility: hidden;">
+      <g ref="armL" class="armL" style="visibility: hidden;">
         <polygon
           fill="#DDF1FA"
           stroke="#3A5E77"
@@ -222,7 +234,7 @@
           d="M150.9,59.4l26-7c2.7-0.7,5.4,0.9,6.1,3.5v0c0.7,2.7-0.9,5.4-3.5,6.1l-21.3,5.7"
         />
 
-        <g class="twoFingers">
+        <g class="twoFingers" ref="twoFingers">
           <path
             fill="#DDF1FA"
             stroke="#3A5E77"
@@ -291,7 +303,7 @@
           d="M97.5,63.9 c-1.7-2.4-5.9-4.1-12.4-5.2c-0.9,2.2-1.8,4.3-2.5,6.5c-3.8-1.8-9.4-3.1-17-3.8c0.5,2.3,1.2,4.5,1.9,6.8c-5-0.6-11.2-0.9-18.4-1 c2,2.9,0.9,3.5,3.9,6.2"
         />
       </g>
-      <g class="armR" style="visibility: hidden;">
+      <g ref="armR" class="armR" style="visibility: hidden;">
         <path
           fill="#ddf1fa"
           stroke="#3a5e77"
@@ -336,11 +348,83 @@
 </template>
 
 <script>
-// import { TweenMax } from 'gsap'
+import { TweenMax, Sine } from "gsap";
 export default {
-  name: "Icon"
+  name: "Icon",
+  props: {
+    passwordFocus: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data() {
+    return {
+      eyesCovered: false
+    };
+  },
+  mounted() {
+    this.init();
+  },
+  watch: {
+    passwordFocus(val) {
+      if (val) {
+        this.coverEyes();
+      } else {
+        this.uncoverEyes();
+      }
+    }
+  },
+  methods: {
+    init() {},
+    coverEyes() {
+      TweenMax.killTweensOf([this.$refs.armL, this.$refs.armR]);
+      TweenMax.set([this.$refs.armL, this.$refs.armR], {
+        visibility: "visible"
+      });
+      TweenMax.to(this.$refs.armL, 0.45, {
+        x: -93,
+        y: 10,
+        rotation: 0,
+        ease: Sine.easeOut
+      });
+      TweenMax.to(this.$refs.armR, 0.45, {
+        x: -93,
+        y: 10,
+        rotation: 0,
+        ease: Sine.easeOut,
+        delay: 0.1
+      });
+      TweenMax.to(this.$refs.bodyBG, 0.45, {
+        morphSVG: this.$refs.bodyBGchanged,
+        ease: Sine.easeOut
+      });
+      this.eyesCovered = true;
+    },
+    uncoverEyes() {
+      TweenMax.killTweensOf([this.$refs.armL, this.$refs.armR]);
+      TweenMax.to(this.$refs.armL, 1.35, { y: 220, ease: Sine.easeOut });
+      TweenMax.to(this.$refs.armL, 1.35, {
+        rotation: 105,
+        ease: Sine.easeOut,
+        delay: 0.1
+      });
+      TweenMax.to(this.$refs.armR, 1.35, { y: 220, ease: Sine.easeOut });
+      TweenMax.to(this.$refs.armR, 1.35, {
+        rotation: -105,
+        ease: Sine.easeOut,
+        delay: 0.1,
+        onComplete: () => {
+          TweenMax.set([this.$refs.armL, this.$refs.armR], {
+            visibility: "hidden"
+          });
+        }
+      });
+      TweenMax.to(this.$refs.bodyBG, 0.45, {
+        morphSVG: this.$refs.bodyBG,
+        ease: Sine.easeOut
+      });
+      this.eyesCovered = false;
+    }
+  }
 };
 </script>
-
-<style scoped>
-</style>
