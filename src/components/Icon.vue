@@ -360,6 +360,14 @@ export default {
     passwordFocus: {
       type: Boolean,
       default: false
+    },
+    emailLength: {
+      type: Number,
+      default: 0
+    },
+    rememberPassword: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -375,7 +383,7 @@ export default {
       if (val) {
         this.onEmailFocus();
       } else {
-        this.resetFace();
+        this.onEmailBlur();
       }
     },
     passwordFocus(val) {
@@ -384,15 +392,32 @@ export default {
       } else {
         this.uncoverEyes();
       }
+    },
+    emailLength(val) {
+      console.log(val);
     }
   },
   methods: {
-    init() {},
+    init() {
+      TweenMax.set(this.$refs.armL, {
+        x: -93,
+        y: 220,
+        rotation: 105,
+        transformOrigin: "top left"
+      });
+      TweenMax.set(this.$refs.armR, {
+        x: -93,
+        y: 220,
+        rotation: -105,
+        transformOrigin: "top right"
+      });
+      this.eyeBlinking(3);
+    },
     onEmailFocus() {
       console.log("onEmailFocus");
     },
-    resetFace() {
-      console.log("resetFace");
+    onEmailBlur() {
+      console.log("onEmailBlur");
     },
     coverEyes() {
       TweenMax.killTweensOf([this.$refs.armL, this.$refs.armR]);
@@ -411,10 +436,6 @@ export default {
         rotation: 0,
         ease: Sine.easeOut,
         delay: 0.1
-      });
-      TweenMax.to(this.$refs.bodyBG, 0.45, {
-        morphSVG: this.$refs.bodyBGchanged,
-        ease: Sine.easeOut
       });
       this.eyesCovered = true;
     },
@@ -437,11 +458,27 @@ export default {
           });
         }
       });
-      TweenMax.to(this.$refs.bodyBG, 0.45, {
-        morphSVG: this.$refs.bodyBG,
-        ease: Sine.easeOut
-      });
       this.eyesCovered = false;
+    },
+    eyeBlinking(delay) {
+      if (delay) {
+        delay = this.getRandomInt(delay);
+      } else {
+        delay = 1;
+      }
+      TweenMax.to([this.$refs.eyeL, this.$refs.eyeR], 0.1, {
+        delay: delay,
+        scaleY: 0,
+        yoyo: true,
+        repeat: 1,
+        transformOrigin: "center center",
+        onComplete: () => {
+          this.eyeBlinking(10);
+        }
+      });
+    },
+    getRandomInt(max) {
+      return Math.floor(Math.random() * Math.floor(max));
     }
   }
 };

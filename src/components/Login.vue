@@ -2,7 +2,12 @@
   <div class="login">
     <div class="svgContainer">
       <div>
-        <Icon :emailFocus="emailFocus" :passwordFocus="passwordFocus"/>
+        <Icon
+          :emailFocus="emailFocus"
+          :passwordFocus="passwordFocus"
+          :emailLength="email.length"
+          :rememberPassword="rememberPassword"
+        />
       </div>
     </div>
     <div class="inputGroup" :class="{focusWithText: emailFocus}">
@@ -31,7 +36,12 @@
       />
       <label id="showPasswordToggle" for="showPasswordCheck">
         Show
-        <input id="showPasswordCheck" type="checkbox" />
+        <input
+          id="showPasswordCheck"
+          type="checkbox"
+          v-model="rememberPassword"
+          @change="onPasswordToggleChange"
+        />
         <div class="indicator"></div>
       </label>
     </div>
@@ -54,7 +64,8 @@ export default {
       emailFocus: false,
       passwordFocus: false,
       email: "",
-      password: ""
+      password: "",
+      rememberPassword: false
     };
   },
   created() {},
@@ -76,6 +87,9 @@ export default {
     },
     onPasswordBlur() {
       this.passwordFocus = false;
+    },
+    onPasswordToggleChange() {
+      console.log(this.rememberPassword);
     }
   }
 };
