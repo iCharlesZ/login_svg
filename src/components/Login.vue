@@ -2,7 +2,7 @@
   <div class="login">
     <div class="svgContainer">
       <div>
-        <Icon :passwordFocus="passwordFocus"/>
+        <Icon :emailFocus="emailFocus" :passwordFocus="passwordFocus"/>
       </div>
     </div>
     <div class="inputGroup" :class="{focusWithText: emailFocus}">
@@ -63,23 +63,18 @@ export default {
   },
   methods: {
     onEmailFocus() {
-      console.log("onEmailFocus");
       this.emailFocus = true;
     },
     onEmailBlur() {
-      console.log("onEmailBlur");
       this.emailFocus = false;
     },
     onEmailLabelClick() {
-      console.log("onEmailLabelClick");
       this.emailFocus = true;
     },
     onPasswordFocus() {
-      console.log("onPasswordFocus");
       this.passwordFocus = true;
     },
     onPasswordBlur() {
-      console.log("onPasswordBlur");
       this.passwordFocus = false;
     }
   }

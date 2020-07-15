@@ -200,7 +200,8 @@
       />
     </g>
     <path
-      class="nose" ref="nose"
+      class="nose"
+      ref="nose"
       d="M97.7 79.9h4.7c1.9 0 3 2.2 1.9 3.7l-2.3 3.3c-.9 1.3-2.9 1.3-3.8 0l-2.3-3.3c-1.3-1.6-.2-3.7 1.8-3.7z"
       fill="#3a5e77"
     />
@@ -352,6 +353,10 @@ import { TweenMax, Sine } from "gsap";
 export default {
   name: "Icon",
   props: {
+    emailFocus: {
+      type: Boolean,
+      default: false
+    },
     passwordFocus: {
       type: Boolean,
       default: false
@@ -366,6 +371,13 @@ export default {
     this.init();
   },
   watch: {
+    emailFocus(val) {
+      if (val) {
+        this.onEmailFocus();
+      } else {
+        this.resetFace();
+      }
+    },
     passwordFocus(val) {
       if (val) {
         this.coverEyes();
@@ -376,6 +388,12 @@ export default {
   },
   methods: {
     init() {},
+    onEmailFocus() {
+      console.log("onEmailFocus");
+    },
+    resetFace() {
+      console.log("resetFace");
+    },
     coverEyes() {
       TweenMax.killTweensOf([this.$refs.armL, this.$refs.armR]);
       TweenMax.set([this.$refs.armL, this.$refs.armR], {
