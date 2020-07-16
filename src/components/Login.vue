@@ -1,12 +1,17 @@
 <template>
   <div class="login">
-    <div class="svgContainer">
+    <div class="svgContainer" ref="mySVG">
       <div>
         <Icon
           :emailFocus="emailFocus"
           :passwordFocus="passwordFocus"
           :emailVal="email"
           :rememberPassword="rememberPassword"
+          :emailScrollMax="emailScrollMax"
+          :emailScrollWidth="emailScrollWidth"
+          :svgCoords="svgCoords"
+          :emailCoords="emailCoords"
+          :fmounted="fmounted"
         />
       </div>
     </div>
@@ -28,7 +33,7 @@
     <div class="inputGroup">
       <label id="loginPasswordLabel">Password</label>
       <input
-        type="password"
+        :type="rememberPassword ? 'text' : 'password'"
         id="loginPassword"
         @focus="onPasswordFocus"
         @blur="onPasswordBlur"
@@ -36,11 +41,7 @@
       />
       <label id="showPasswordToggle" for="showPasswordCheck">
         Show
-        <input
-          id="showPasswordCheck"
-          type="checkbox"
-          v-model="rememberPassword"
-        />
+        <input id="showPasswordCheck" type="checkbox" v-model="rememberPassword" />
         <div class="indicator"></div>
       </label>
     </div>
@@ -60,16 +61,36 @@ export default {
   data() {
     return {
       emailScrollMax: 0,
+      emailScrollWidth: 0,
       emailFocus: false,
       passwordFocus: false,
       email: "",
       password: "",
-      rememberPassword: false
+      rememberPassword: false,
+      svgCoords: {
+        x: 0,
+        y: 0
+      },
+      emailCoords: {
+        x: 0,
+        y: 0
+      },
+      fmounted: false
     };
   },
   created() {},
   mounted() {
     this.emailScrollMax = this.$refs.email.scrollWidth;
+    this.svgCoords = this.getPosition(this.$refs.mySVG);
+    this.emailCoords = this.getPosition(this.$refs.email);
+    this.fmounted = true
+  },
+  watch: {
+    email() {
+      this.emailScrollWidth = this.$refs.email.scrollWidth;
+      this.svgCoords = this.getPosition(this.$refs.mySVG);
+      this.emailCoords = this.getPosition(this.$refs.email);
+    }
   },
   methods: {
     onEmailFocus() {
@@ -83,6 +104,19 @@ export default {
     },
     onPasswordBlur() {
       this.passwordFocus = false;
+    },
+    getPosition(ref) {
+      let xPos = 0;
+      let yPos = 0;
+      while (ref) {
+        xPos += ref.offsetLeft - ref.scrollLeft + ref.clientLeft;
+        yPos += ref.offsetTop - ref.scrollTop + ref.clientTop;
+        ref = ref.offsetParent;
+      }
+      return {
+        x: xPos,
+        y: yPos
+      };
     }
   }
 };
