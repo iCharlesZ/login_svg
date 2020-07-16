@@ -349,7 +349,7 @@
 </template>
 
 <script>
-import { TweenMax, Sine } from "gsap";
+import { TweenMax, Sine, Power2 } from "gsap";
 export default {
   name: "Icon",
   props: {
@@ -361,9 +361,9 @@ export default {
       type: Boolean,
       default: false
     },
-    emailLength: {
-      type: Number,
-      default: 0
+    emailVal: {
+      type: String,
+      default: ""
     },
     rememberPassword: {
       type: Boolean,
@@ -372,7 +372,8 @@ export default {
   },
   data() {
     return {
-      eyesCovered: false
+      eyesCovered: false,
+      eyeScale: 1
     };
   },
   mounted() {
@@ -393,7 +394,14 @@ export default {
         this.uncoverEyes();
       }
     },
-    emailLength(val) {
+    rememberPassword(val) {
+      if (val) {
+        this.spreadFingers();
+      } else {
+        this.closeFingers();
+      }
+    },
+    emailVal(val) {
       console.log(val);
     }
   },
@@ -411,7 +419,7 @@ export default {
         rotation: -105,
         transformOrigin: "top right"
       });
-      this.eyeBlinking(3);
+      this.eyeBlinking(1);
     },
     onEmailFocus() {
       console.log("onEmailFocus");
@@ -437,6 +445,10 @@ export default {
         ease: Sine.easeOut,
         delay: 0.1
       });
+      TweenMax.to(this.$refs.bodyBG, 0.45, {
+        morphSVG: this.$refs.bodyBGchanged,
+        ease: Sine.easeOut
+      });
       this.eyesCovered = true;
     },
     uncoverEyes() {
@@ -458,7 +470,29 @@ export default {
           });
         }
       });
+      TweenMax.to(this.$refs.bodyBG, 0.45, {
+        morphSVG: this.$refs.bodyBG,
+        ease: Sine.easeOut
+      });
       this.eyesCovered = false;
+    },
+    spreadFingers() {
+      TweenMax.to(this.$refs.twoFingers, 0.35, {
+        transformOrigin: "bottom left",
+        rotation: 30,
+        x: -9,
+        y: -2,
+        ease: Power2.easeInOut
+      });
+    },
+    closeFingers() {
+      TweenMax.to(this.$refs.twoFingers, 0.35, {
+        transformOrigin: "bottom left",
+        rotation: 0,
+        x: 0,
+        y: 0,
+        ease: Power2.easeInOut
+      });
     },
     eyeBlinking(delay) {
       if (delay) {
@@ -473,12 +507,15 @@ export default {
         repeat: 1,
         transformOrigin: "center center",
         onComplete: () => {
-          this.eyeBlinking(10);
+          this.eyeBlinking(8);
         }
       });
     },
     getRandomInt(max) {
-      return Math.floor(Math.random() * Math.floor(max));
+      return Math.floor(Math.random() * Math.floor(max) + 2);
+    },
+    calcFaceMove(val) {
+      console.log("calcFaceMove", val);
     }
   }
 };

@@ -5,13 +5,13 @@
         <Icon
           :emailFocus="emailFocus"
           :passwordFocus="passwordFocus"
-          :emailLength="email.length"
+          :emailVal="email"
           :rememberPassword="rememberPassword"
         />
       </div>
     </div>
-    <div class="inputGroup" :class="{focusWithText: emailFocus}">
-      <label for="loginEmail" id="loginEmailLabel" @click="onEmailLabelClick">Email</label>
+    <div class="inputGroup" :class="{focusWithText: emailFocus || email}">
+      <label id="loginEmailLabel">Email</label>
       <input
         type="email"
         id="loginEmail"
@@ -26,7 +26,7 @@
       <p class="helper">email@domain.com</p>
     </div>
     <div class="inputGroup">
-      <label for="loginPassword" id="loginPasswordLabel">Password</label>
+      <label id="loginPasswordLabel">Password</label>
       <input
         type="password"
         id="loginPassword"
@@ -40,7 +40,6 @@
           id="showPasswordCheck"
           type="checkbox"
           v-model="rememberPassword"
-          @change="onPasswordToggleChange"
         />
         <div class="indicator"></div>
       </label>
@@ -79,17 +78,11 @@ export default {
     onEmailBlur() {
       this.emailFocus = false;
     },
-    onEmailLabelClick() {
-      this.emailFocus = true;
-    },
     onPasswordFocus() {
       this.passwordFocus = true;
     },
     onPasswordBlur() {
       this.passwordFocus = false;
-    },
-    onPasswordToggleChange() {
-      console.log(this.rememberPassword);
     }
   }
 };
