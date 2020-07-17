@@ -361,11 +361,19 @@ export default {
       type: Boolean,
       default: false
     },
+    checkboxFocus: {
+      type: Boolean,
+      default: false
+    },
     emailVal: {
       type: String,
       default: ""
     },
     rememberPassword: {
+      type: Boolean,
+      default: false
+    },
+    coverEye: {
       type: Boolean,
       default: false
     },
@@ -390,7 +398,6 @@ export default {
   },
   data() {
     return {
-      eyesCovered: false,
       mouthStatus: "small",
       eyeScale: 1,
       screenCenter: 0,
@@ -422,14 +429,20 @@ export default {
       if (val) {
         this.onEmailFocus();
       } else {
-        this.onEmailBlur();
+        setTimeout(() => {
+          this.onEmailBlur();
+        }, 100);
       }
     },
-    passwordFocus(val) {
+    coverEye(val) {
       if (val) {
         this.coverEyes();
       } else {
-        this.uncoverEyes();
+        setTimeout(() => {
+          if (!this.passwordFocus && !this.checkboxFocus) {
+            this.uncoverEyes();
+          }
+        }, 100);
       }
     },
     rememberPassword(val) {
@@ -756,7 +769,6 @@ export default {
         morphSVG: this.$refs.bodyBGchanged,
         ease: Sine.easeOut
       });
-      this.eyesCovered = true;
     },
     uncoverEyes() {
       TweenMax.killTweensOf([this.$refs.armL, this.$refs.armR]);
@@ -781,7 +793,6 @@ export default {
         morphSVG: this.$refs.bodyBG,
         ease: Sine.easeOut
       });
-      this.eyesCovered = false;
     },
     spreadFingers() {
       this.coverEyes();

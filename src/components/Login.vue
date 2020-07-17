@@ -5,8 +5,10 @@
         <Icon
           :emailFocus="emailFocus"
           :passwordFocus="passwordFocus"
+          :checkboxFocus="checkboxFocus"
           :emailVal="email"
           :rememberPassword="rememberPassword"
+          :coverEye="coverEyes"
           :emailScrollMax="emailScrollMax"
           :emailScrollWidth="emailScrollWidth"
           :svgCoords="svgCoords"
@@ -39,9 +41,22 @@
         @blur="onPasswordBlur"
         v-model="password"
       />
-      <label id="showPasswordToggle" for="showPasswordCheck">
+      <label
+        id="showPasswordToggle"
+        for="showPasswordCheck"
+        @mousedown="onCheckboxMousedown"
+        @mouseup="onCheckboxMouseup"
+      >
         Show
-        <input id="showPasswordCheck" type="checkbox" v-model="rememberPassword" />
+        <input
+          ref="pwdCheckbox"
+          id="showPasswordCheck"
+          type="checkbox"
+          v-model="rememberPassword"
+          @focus="onCheckboxFocus"
+          @blur="onCheckboxBlur"
+          @click="onCheckboxClick"
+        />
         <div class="indicator"></div>
       </label>
     </div>
@@ -64,9 +79,14 @@ export default {
       emailScrollWidth: 0,
       emailFocus: false,
       passwordFocus: false,
+      checkboxFocus: false,
+      showPasswordClicked: false,
+      activeElement: "",
       email: "",
       password: "",
       rememberPassword: false,
+      coverEyes: false,
+      eyesCovered: false,
       svgCoords: {
         x: 0,
         y: 0
@@ -83,7 +103,7 @@ export default {
     this.emailScrollMax = this.$refs.email.scrollWidth;
     this.svgCoords = this.getPosition(this.$refs.mySVG);
     this.emailCoords = this.getPosition(this.$refs.email);
-    this.fmounted = true
+    this.fmounted = true;
   },
   watch: {
     email() {
@@ -95,15 +115,60 @@ export default {
   methods: {
     onEmailFocus() {
       this.emailFocus = true;
+      this.activeElement = "email";
     },
     onEmailBlur() {
       this.emailFocus = false;
+      this.activeElement = null;
     },
     onPasswordFocus() {
       this.passwordFocus = true;
+      this.activeElement = "password";
+      if (!this.eyesCovered) {
+        this.coverEyes = true;
+        this.eyesCovered = true;
+      }
     },
     onPasswordBlur() {
       this.passwordFocus = false;
+      this.activeElement = null;
+      if (
+        this.activeElement !== "toggle" &&
+        this.activeElement !== "password"
+      ) {
+        this.coverEyes = false;
+        this.eyesCovered = false;
+      }
+    },
+    onCheckboxFocus() {
+      this.checkboxFocus = true;
+      this.activeElement = "toggle";
+      if (!this.eyesCovered) {
+        this.coverEyes = true;
+        this.eyesCovered = true;
+      }
+    },
+    onCheckboxBlur() {
+      this.checkboxFocus = false;
+      this.activeElement = null;
+      if (!this.showPasswordClicked) {
+        if (
+          this.activeElement !== "password" &&
+          this.activeElement !== "toggle"
+        ) {
+          this.coverEyes = false;
+          this.eyesCovered = false;
+        }
+      }
+    },
+    onCheckboxMousedown() {
+      this.showPasswordClicked = true;
+    },
+    onCheckboxMouseup() {
+      this.showPasswordClicked = false;
+    },
+    onCheckboxClick() {
+      this.$refs.pwdCheckbox.focus();
     },
     getPosition(ref) {
       let xPos = 0;
