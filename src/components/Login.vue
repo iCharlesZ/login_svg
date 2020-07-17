@@ -8,12 +8,7 @@
           :checkboxFocus="checkboxFocus"
           :emailVal="email"
           :rememberPassword="rememberPassword"
-          :coverEye="coverEyes"
-          :emailScrollMax="emailScrollMax"
-          :emailScrollWidth="emailScrollWidth"
-          :svgCoords="svgCoords"
-          :emailCoords="emailCoords"
-          :fmounted="fmounted"
+          :isCoverEyes="coverEyes"
         />
       </div>
     </div>
@@ -75,8 +70,6 @@ export default {
   name: "Login",
   data() {
     return {
-      emailScrollMax: 0,
-      emailScrollWidth: 0,
       emailFocus: false,
       passwordFocus: false,
       checkboxFocus: false,
@@ -86,31 +79,8 @@ export default {
       password: "",
       rememberPassword: false,
       coverEyes: false,
-      eyesCovered: false,
-      svgCoords: {
-        x: 0,
-        y: 0
-      },
-      emailCoords: {
-        x: 0,
-        y: 0
-      },
-      fmounted: false
+      eyesCovered: false
     };
-  },
-  created() {},
-  mounted() {
-    this.emailScrollMax = this.$refs.email.scrollWidth;
-    this.svgCoords = this.getPosition(this.$refs.mySVG);
-    this.emailCoords = this.getPosition(this.$refs.email);
-    this.fmounted = true;
-  },
-  watch: {
-    email() {
-      this.emailScrollWidth = this.$refs.email.scrollWidth;
-      this.svgCoords = this.getPosition(this.$refs.mySVG);
-      this.emailCoords = this.getPosition(this.$refs.email);
-    }
   },
   methods: {
     onEmailFocus() {
@@ -169,19 +139,6 @@ export default {
     },
     onCheckboxClick() {
       this.$refs.pwdCheckbox.focus();
-    },
-    getPosition(ref) {
-      let xPos = 0;
-      let yPos = 0;
-      while (ref) {
-        xPos += ref.offsetLeft - ref.scrollLeft + ref.clientLeft;
-        yPos += ref.offsetTop - ref.scrollTop + ref.clientTop;
-        ref = ref.offsetParent;
-      }
-      return {
-        x: xPos,
-        y: yPos
-      };
     }
   }
 };

@@ -373,34 +373,24 @@ export default {
       type: Boolean,
       default: false
     },
-    coverEye: {
-      type: Boolean,
-      default: false
-    },
-    emailScrollMax: {
-      type: Number,
-      default: 0
-    },
-    emailScrollWidth: {
-      type: Number,
-      default: 0
-    },
-    svgCoords: {
-      type: Object
-    },
-    emailCoords: {
-      type: Object
-    },
-    fmounted: {
+    isCoverEyes: {
       type: Boolean,
       default: false
     }
   },
   data() {
     return {
+      emailScrollMax: 0,
+      emailScrollWidth: 0,
+      svgCoords: {},
+      emailCoords: {},
       mouthStatus: "small",
       eyeScale: 1,
       screenCenter: 0,
+      eyeLAngle: 0,
+      eyeRAngle: 0,
+      noseAngle: 0,
+      mouthAngle: 0,
       eyeLCoords: {},
       eyeRCoords: {},
       noseCoords: {},
@@ -422,6 +412,9 @@ export default {
     };
   },
   mounted() {
+    this.emailScrollMax = this.$parent.$refs.email.scrollWidth;
+    this.svgCoords = this.getPosition(this.$parent.$refs.mySVG);
+    this.emailCoords = this.getPosition(this.$parent.$refs.email);
     this.init();
   },
   watch: {
@@ -434,7 +427,7 @@ export default {
         }, 100);
       }
     },
-    coverEye(val) {
+    isCoverEyes(val) {
       if (val) {
         this.coverEyes();
       } else {
@@ -453,12 +446,10 @@ export default {
       }
     },
     emailVal(val) {
+      this.emailScrollWidth = this.$parent.$refs.email.scrollWidth;
+      this.svgCoords = this.getPosition(this.$parent.$refs.mySVG);
+      this.emailCoords = this.getPosition(this.$parent.$refs.email);
       this.calcFaceMove(val);
-    },
-    fmounted(val) {
-      if (val) {
-        this.faMounted();
-      }
     }
   },
   methods: {
@@ -477,8 +468,6 @@ export default {
       });
       TweenMax.set(this.$refs.mouth, { transformOrigin: "center center" });
       this.eyeBlinking(1);
-    },
-    faMounted() {
       this.screenCenter = this.svgCoords.x + 100;
       this.eyeLCoords = { x: this.svgCoords.x + 84, y: this.svgCoords.y + 76 };
       this.eyeRCoords = { x: this.svgCoords.x + 113, y: this.svgCoords.y + 76 };
@@ -581,123 +570,176 @@ export default {
         });
         this.eyeScale = 1;
       }
-      if (this.emailScrollWidth <= this.emailScrollMax) {
-        // console.log("<");
-      } else {
-        // this.eyeLAngle = this.getAngle(
-        //   this.eyeLCoords.x,
-        //   this.eyeLCoords.y,
-        //   this.emailCoords.x + this.emailScrollMax,
-        //   this.emailCoords.y + 25
-        // );
-        // this.eyeRAngle = this.getAngle(
-        //   this.eyeRCoords.x,
-        //   this.eyeRCoords.y,
-        //   this.emailCoords.x + this.emailScrollMax,
-        //   this.emailCoords.y + 25
-        // );
-        // this.noseAngle = this.getAngle(
-        //   this.noseCoords.x,
-        //   this.noseCoords.y,
-        //   this.emailCoords.x + this.emailScrollMax,
-        //   this.emailCoords.y + 25
-        // );
-        // this.mouthAngle = this.getAngle(
-        //   this.mouthCoords.x,
-        //   this.mouthCoords.y,
-        //   this.emailCoords.x + this.emailScrollMax,
-        //   this.emailCoords.y + 25
-        // );
-      }
-      // this.eyeLX = Math.cos(this.eyeLAngle) * 20;
-      // this.eyeLY = Math.sin(this.eyeLAngle) * 10;
-      // this.eyeRX = Math.cos(this.eyeRAngle) * 20;
-      // this.eyeRY = Math.sin(this.eyeRAngle) * 10;
-      // this.noseX = Math.cos(this.noseAngle) * 23;
-      // this.noseY = Math.sin(this.noseAngle) * 10;
-      // this.mouthX = Math.cos(this.mouthAngle) * 23;
-      // this.mouthY = Math.sin(this.mouthAngle) * 10;
-      // this.mouthR = Math.cos(this.mouthAngle) * 6;
-      // this.chinX = this.mouthX * 0.8;
-      // this.chinY = this.mouthY * 0.5;
-      // this.chinS = 1 - (this.dFromC * 0.15) / 100;
-      // if (this.chinS > 1) {
-      //   this.chinS = 1 - (this.chinS - 1);
-      //   if (this.chinS < this.chinMin) {
-      //     this.chinS = this.chinMin;
-      //   }
-      // }
-      // this.faceX = this.mouthX * 0.3;
-      // this.faceY = this.mouthY * 0.4;
-      // this.faceSkew = Math.cos(this.mouthAngle) * 5;
-      // this.eyebrowSkew = Math.cos(this.mouthAngle) * 25;
-      // this.outerEarX = Math.cos(this.mouthAngle) * 4;
-      // this.outerEarY = Math.cos(this.mouthAngle) * 5;
-      // this.hairX = Math.cos(this.mouthAngle) * 6;
-      // this.hairS = 1.2;
 
-      // TweenMax.to(this.$refs.eyeL, 1, { x: -this.eyeLX, y: -this.eyeLY, ease: Expo.easeOut });
-      // TweenMax.to(this.$refs.eyeR, 1, { x: -this.eyeRX, y: -this.eyeRY, ease: Expo.easeOut });
-      // TweenMax.to(this.$refs.nose, 1, {
-      //   x: -this.noseX,
-      //   y: -this.noseY,
-      //   rotation: this.mouthR,
-      //   transformOrigin: "center center",
-      //   ease: Expo.easeOut
-      // });
-      // TweenMax.to(this.$refs.mouth, 1, {
-      //   x: -this.mouthX,
-      //   y: -this.mouthY,
-      //   rotation: this.mouthR,
-      //   transformOrigin: "center center",
-      //   ease: Expo.easeOut
-      // });
-      // TweenMax.to(this.$refs.chin, 1, {
-      //   x: -this.chinX,
-      //   y: -this.chinY,
-      //   scaleY: this.chinS,
-      //   ease: Expo.easeOut
-      // });
-      // TweenMax.to(this.$refs.face, 1, {
-      //   x: -this.faceX,
-      //   y: -this.faceY,
-      //   skewX: -this.faceSkew,
-      //   transformOrigin: "center top",
-      //   ease: Expo.easeOut
-      // });
-      // TweenMax.to(this.$refs.eyebrow, 1, {
-      //   x: -this.faceX,
-      //   y: -this.faceY,
-      //   skewX: -this.eyebrowSkew,
-      //   transformOrigin: "center top",
-      //   ease: Expo.easeOut
-      // });
-      // TweenMax.to(this.$refs.outerEarL, 1, {
-      //   x: this.outerEarX,
-      //   y: -this.outerEarY,
-      //   ease: Expo.easeOut
-      // });
-      // TweenMax.to(this.$refs.outerEarR, 1, {
-      //   x: this.outerEarX,
-      //   y: this.outerEarY,
-      //   ease: Expo.easeOut
-      // });
-      // TweenMax.to(this.$refs.earHairL, 1, {
-      //   x: -this.outerEarX,
-      //   y: -this.outerEarY,
-      //   ease: Expo.easeOut
-      // });
-      // TweenMax.to(this.$refs.earHairR, 1, {
-      //   x: -this.outerEarX,
-      //   y: this.outerEarY,
-      //   ease: Expo.easeOut
-      // });
-      // TweenMax.to(this.$refs.hair, 1, {
-      //   x: this.hairX,
-      //   scaleY: this.hairS,
-      //   transformOrigin: "center bottom",
-      //   ease: Expo.easeOut
-      // });
+      let carPos = this.$parent.$refs.email.selectionEnd;
+      let div = document.createElement("div");
+      let span = document.createElement("span");
+      let copyStyle = getComputedStyle(this.$parent.$refs.email);
+      let caretCoords = {};
+      if (carPos == null || carPos == 0) {
+        carPos = val.length;
+      }
+      [].forEach.call(copyStyle, function(prop) {
+        div.style[prop] = copyStyle[prop];
+      });
+      div.style.position = "absolute";
+      document.body.appendChild(div);
+      div.textContent = val.substr(0, carPos);
+      span.textContent = val.substr(carPos) || ".";
+      div.appendChild(span);
+
+      if (this.emailScrollWidth <= this.emailScrollMax) {
+        caretCoords = this.getPosition(span);
+        this.dFromC = this.screenCenter - (caretCoords.x + this.emailCoords.x);
+        this.eyeLAngle = this.getAngle(
+          this.eyeLCoords.x,
+          this.eyeLCoords.y,
+          this.emailCoords.x + caretCoords.x,
+          this.emailCoords.y + 25
+        );
+        this.eyeRAngle = this.getAngle(
+          this.eyeRCoords.x,
+          this.eyeRCoords.y,
+          this.emailCoords.x + caretCoords.x,
+          this.emailCoords.y + 25
+        );
+        this.noseAngle = this.getAngle(
+          this.noseCoords.x,
+          this.noseCoords.y,
+          this.emailCoords.x + caretCoords.x,
+          this.emailCoords.y + 25
+        );
+        this.mouthAngle = this.getAngle(
+          this.mouthCoords.x,
+          this.mouthCoords.y,
+          this.emailCoords.x + caretCoords.x,
+          this.emailCoords.y + 25
+        );
+      } else {
+        this.eyeLAngle = this.getAngle(
+          this.eyeLCoords.x,
+          this.eyeLCoords.y,
+          this.emailCoords.x + this.emailScrollMax,
+          this.emailCoords.y + 25
+        );
+        this.eyeRAngle = this.getAngle(
+          this.eyeRCoords.x,
+          this.eyeRCoords.y,
+          this.emailCoords.x + this.emailScrollMax,
+          this.emailCoords.y + 25
+        );
+        this.noseAngle = this.getAngle(
+          this.noseCoords.x,
+          this.noseCoords.y,
+          this.emailCoords.x + this.emailScrollMax,
+          this.emailCoords.y + 25
+        );
+        this.mouthAngle = this.getAngle(
+          this.mouthCoords.x,
+          this.mouthCoords.y,
+          this.emailCoords.x + this.emailScrollMax,
+          this.emailCoords.y + 25
+        );
+      }
+      this.eyeLX = Math.cos(this.eyeLAngle) * 20;
+      this.eyeLY = Math.sin(this.eyeLAngle) * 10;
+      this.eyeRX = Math.cos(this.eyeRAngle) * 20;
+      this.eyeRY = Math.sin(this.eyeRAngle) * 10;
+      this.noseX = Math.cos(this.noseAngle) * 23;
+      this.noseY = Math.sin(this.noseAngle) * 10;
+      this.mouthX = Math.cos(this.mouthAngle) * 23;
+      this.mouthY = Math.sin(this.mouthAngle) * 10;
+      this.mouthR = Math.cos(this.mouthAngle) * 6;
+      this.chinX = this.mouthX * 0.8;
+      this.chinY = this.mouthY * 0.5;
+      this.chinS = 1 - (this.dFromC * 0.15) / 100;
+      if (this.chinS > 1) {
+        this.chinS = 1 - (this.chinS - 1);
+        if (this.chinS < this.chinMin) {
+          this.chinS = this.chinMin;
+        }
+      }
+      this.faceX = this.mouthX * 0.3;
+      this.faceY = this.mouthY * 0.4;
+      this.faceSkew = Math.cos(this.mouthAngle) * 5;
+      this.eyebrowSkew = Math.cos(this.mouthAngle) * 25;
+      this.outerEarX = Math.cos(this.mouthAngle) * 4;
+      this.outerEarY = Math.cos(this.mouthAngle) * 5;
+      this.hairX = Math.cos(this.mouthAngle) * 6;
+      this.hairS = 1.2;
+
+      TweenMax.to(this.$refs.eyeL, 1, {
+        x: -this.eyeLX,
+        y: -this.eyeLY,
+        ease: Expo.easeOut
+      });
+      TweenMax.to(this.$refs.eyeR, 1, {
+        x: -this.eyeRX,
+        y: -this.eyeRY,
+        ease: Expo.easeOut
+      });
+      TweenMax.to(this.$refs.nose, 1, {
+        x: -this.noseX,
+        y: -this.noseY,
+        rotation: this.mouthR,
+        transformOrigin: "center center",
+        ease: Expo.easeOut
+      });
+      TweenMax.to(this.$refs.mouth, 1, {
+        x: -this.mouthX,
+        y: -this.mouthY,
+        rotation: this.mouthR,
+        transformOrigin: "center center",
+        ease: Expo.easeOut
+      });
+      TweenMax.to(this.$refs.chin, 1, {
+        x: -this.chinX,
+        y: -this.chinY,
+        scaleY: this.chinS,
+        ease: Expo.easeOut
+      });
+      TweenMax.to(this.$refs.face, 1, {
+        x: -this.faceX,
+        y: -this.faceY,
+        skewX: -this.faceSkew,
+        transformOrigin: "center top",
+        ease: Expo.easeOut
+      });
+      TweenMax.to(this.$refs.eyebrow, 1, {
+        x: -this.faceX,
+        y: -this.faceY,
+        skewX: -this.eyebrowSkew,
+        transformOrigin: "center top",
+        ease: Expo.easeOut
+      });
+      TweenMax.to(this.$refs.outerEarL, 1, {
+        x: this.outerEarX,
+        y: -this.outerEarY,
+        ease: Expo.easeOut
+      });
+      TweenMax.to(this.$refs.outerEarR, 1, {
+        x: this.outerEarX,
+        y: this.outerEarY,
+        ease: Expo.easeOut
+      });
+      TweenMax.to(this.$refs.earHairL, 1, {
+        x: -this.outerEarX,
+        y: -this.outerEarY,
+        ease: Expo.easeOut
+      });
+      TweenMax.to(this.$refs.earHairR, 1, {
+        x: -this.outerEarX,
+        y: this.outerEarY,
+        ease: Expo.easeOut
+      });
+      TweenMax.to(this.$refs.hair, 1, {
+        x: this.hairX,
+        scaleY: this.hairS,
+        transformOrigin: "center bottom",
+        ease: Expo.easeOut
+      });
+
+      document.body.removeChild(div);
     },
     onEmailBlur() {
       TweenMax.to([this.$refs.eyeL, this.$refs.eyeR], 1, {
@@ -833,6 +875,19 @@ export default {
     },
     getRandomInt(max) {
       return Math.floor(Math.random() * Math.floor(max) + 2);
+    },
+    getPosition(ref) {
+      let xPos = 0;
+      let yPos = 0;
+      while (ref) {
+        xPos += ref.offsetLeft - ref.scrollLeft + ref.clientLeft;
+        yPos += ref.offsetTop - ref.scrollTop + ref.clientTop;
+        ref = ref.offsetParent;
+      }
+      return {
+        x: xPos,
+        y: yPos
+      };
     },
     getAngle(x1, y1, x2, y2) {
       return Math.atan2(y1 - y2, x1 - x2);
