@@ -373,6 +373,7 @@ export default {
       font-family: inherit;
       -webkit-transition: background-color 0.2s ease-out;
       transition: background-color 0.2s ease-out;
+      outline: none;
 
       &:hover,
       &:active {
