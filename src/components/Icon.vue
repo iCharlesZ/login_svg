@@ -616,30 +616,30 @@ export default {
           this.emailCoords.y + 25
         );
       } else {
-        this.eyeLAngle = this.getAngle(
-          this.eyeLCoords.x,
-          this.eyeLCoords.y,
-          this.emailCoords.x + this.emailScrollMax,
-          this.emailCoords.y + 25
-        );
-        this.eyeRAngle = this.getAngle(
-          this.eyeRCoords.x,
-          this.eyeRCoords.y,
-          this.emailCoords.x + this.emailScrollMax,
-          this.emailCoords.y + 25
-        );
-        this.noseAngle = this.getAngle(
-          this.noseCoords.x,
-          this.noseCoords.y,
-          this.emailCoords.x + this.emailScrollMax,
-          this.emailCoords.y + 25
-        );
-        this.mouthAngle = this.getAngle(
-          this.mouthCoords.x,
-          this.mouthCoords.y,
-          this.emailCoords.x + this.emailScrollMax,
-          this.emailCoords.y + 25
-        );
+        // this.eyeLAngle = this.getAngle(
+        //   this.eyeLCoords.x,
+        //   this.eyeLCoords.y,
+        //   this.emailCoords.x + this.emailScrollMax,
+        //   this.emailCoords.y + 25
+        // );
+        // this.eyeRAngle = this.getAngle(
+        //   this.eyeRCoords.x,
+        //   this.eyeRCoords.y,
+        //   this.emailCoords.x + this.emailScrollMax,
+        //   this.emailCoords.y + 25
+        // );
+        // this.noseAngle = this.getAngle(
+        //   this.noseCoords.x,
+        //   this.noseCoords.y,
+        //   this.emailCoords.x + this.emailScrollMax,
+        //   this.emailCoords.y + 25
+        // );
+        // this.mouthAngle = this.getAngle(
+        //   this.mouthCoords.x,
+        //   this.mouthCoords.y,
+        //   this.emailCoords.x + this.emailScrollMax,
+        //   this.emailCoords.y + 25
+        // );
       }
       this.eyeLX = Math.cos(this.eyeLAngle) * 20;
       this.eyeLY = Math.sin(this.eyeLAngle) * 10;
